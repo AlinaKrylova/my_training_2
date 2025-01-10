@@ -1,0 +1,10 @@
+class Solution:
+
+    def isPalindrome(self, x: int) -> bool:
+        x = str(x).lower()
+        swap = False
+        if x == x[::-1]:
+            swap = True
+        return swap
+
+print(Solution.isPalindrome(Solution(), 121))

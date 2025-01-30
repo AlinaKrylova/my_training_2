@@ -1,0 +1,20 @@
+import sys
+
+MOD = 998244353
+
+def solve():
+    # Считываем входные данные
+    n, k = map(int, sys.stdin.readline().split())
+    a = list(map(int, sys.stdin.readline().split()))
+
+    # Вычисляем f(p) для каждого p
+    results = []
+    for p in range(1, k + 1):
+        fp = sum(pow((a[i] + a[j]) % MOD, p, MOD) for i in range(n) for j in range(i + 1, n)) % MOD
+        results.append(fp)
+
+    # Выводим результаты
+    sys.stdout.write("\n".join(map(str, results)) + "\n")
+
+if __name__ == "__main__":
+    solve()

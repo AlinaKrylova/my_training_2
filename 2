@@ -1,0 +1,12 @@
+def max_bouquet_cost(a):
+    if a < 3:
+        return -1
+    for x in range(a, 2, -1):
+        if bin(x).count('1') == 3:
+            return x
+    return -1
+
+n = int(input())
+for _ in range(n):
+    a_i = int(input())
+    print(max_bouquet_cost(a_i))

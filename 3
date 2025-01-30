@@ -1,0 +1,26 @@
+def min_adjustments(n, m, a):
+    a1, a2 = a[0], a[1]
+    adjustments = []
+
+    # Для каждого дня, начиная с 3-го, вычисляем количество корректировок
+    for i in range(2, n):
+        ai = a[i]
+        # Если день уже хороший, корректировки не нужны
+        if a1 <= ai <= a2:
+            adjustments.append(0)
+        else:
+            # Вычисляем количество корректировок
+            delta = max(0, a1 - ai) + max(0, ai - a2)
+            adjustments.append(delta)
+
+    # Сортируем корректировки и выбираем первые m
+    adjustments.sort()
+    return sum(adjustments[:m])
+
+
+# Ввод данных
+n, m = map(int, input().split())
+a = list(map(int, input().split()))
+
+# Вывод результата
+print(min_adjustments(n, m, a))

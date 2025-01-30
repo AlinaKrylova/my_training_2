@@ -1,0 +1,41 @@
+def min_operations(n, x, y, z, a):
+    INF = float('inf')
+
+    # Находим минимальные операции для кратности x, y, z
+    min_x = min((x - ai % x) % x for ai in a)
+    min_y = min((y - ai % y) % y for ai in a)
+    min_z = min((z - ai % z) % z for ai in a)
+
+    # Базовый случай: если берем три разных числа
+    min_ops = min_x + min_y + min_z
+
+    # Ищем одно число, покрывающее сразу два условия
+    for ai in a:
+        ops_x = (x - ai % x) % x
+        ops_y = (y - ai % y) % y
+        ops_z = (z - ai % z) % z
+
+        # Одно число покрывает два условия
+        min_ops = min(min_ops, max(ops_x, ops_y) + min_z)
+        min_ops = min(min_ops, max(ops_x, ops_z) + min_y)
+        min_ops = min(min_ops, max(ops_y, ops_z) + min_x)
+
+    # Ищем два числа, покрывающих три условия
+    best_x = best_y = best_z = INF
+
+    for ai in a:
+        best_x = min(best_x, (x - ai % x) % x)
+        best_y = min(best_y, (y - ai % y) % y)
+        best_z = min(best_z, (z - ai % z) % z)
+
+    # Два числа, которые вместе дают все три условия
+    min_ops = min(min_ops, best_x + best_y + best_z)
+
+    return min_ops
+
+# Читаем входные данные
+n, x, y, z = map(int, input().split())
+a = list(map(int, input().split()))
+
+# Выводим результат
+print(min_operations(n, x, y, z, a))

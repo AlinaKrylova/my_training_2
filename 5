@@ -1,0 +1,25 @@
+def solve():
+    import sys
+
+    # Читаем n и s
+    n, s = map(int, input().split())
+    a = list(map(int, input().split()))
+
+    total_sum = 0  # Итоговая сумма f(l, r)
+
+    for l in range(n):  # Фиксируем левую границу
+        cur_sum = 0  # Текущая сумма сегментов
+        cuts = 0  # Количество разрезов
+
+        for r in range(l, n):  # Двигаем правую границу
+            cur_sum += a[r]
+
+            if cur_sum > s:  # Если превысили лимит, делаем разрез
+                cuts += 1
+                cur_sum = a[r]  # Начинаем новую часть
+
+            total_sum += cuts + 1  # Добавляем f(l, r)
+
+    print(total_sum)
+
+solve()
